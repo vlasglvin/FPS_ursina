@@ -1,0 +1,11 @@
+Model Information:
+* title:	Thompson submachine gun
+* source:	https://sketchfab.com/3d-models/thompson-submachine-gun-5fe11dfebf734b4aa49c43545397abd1
+* author:	Artem Goyko (https://sketchfab.com/Artem.Goyko)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Thompson submachine gun" (https://sketchfab.com/3d-models/thompson-submachine-gun-5fe11dfebf734b4aa49c43545397abd1) by Artem Goyko (https://sketchfab.com/Artem.Goyko) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
