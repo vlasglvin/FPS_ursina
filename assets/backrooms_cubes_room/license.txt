@@ -1,0 +1,11 @@
+Model Information:
+* title:	Backrooms Cubes Room
+* source:	https://sketchfab.com/3d-models/backrooms-cubes-room-3baef7aace494537bbac98c60bb75e8c
+* author:	Santrix (https://sketchfab.com/TrixtheProtogen)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Backrooms Cubes Room" (https://sketchfab.com/3d-models/backrooms-cubes-room-3baef7aace494537bbac98c60bb75e8c) by Santrix (https://sketchfab.com/TrixtheProtogen) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
