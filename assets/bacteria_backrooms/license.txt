@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bacteria Backrooms
+* source:	https://sketchfab.com/3d-models/bacteria-backrooms-1fb71d64d7164ae8b6271922b3378e0b
+* author:	PipotGZ (https://sketchfab.com/PipotGZ)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bacteria Backrooms" (https://sketchfab.com/3d-models/bacteria-backrooms-1fb71d64d7164ae8b6271922b3378e0b) by PipotGZ (https://sketchfab.com/PipotGZ) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

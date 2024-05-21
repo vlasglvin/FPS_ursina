@@ -1,0 +1,11 @@
+Model Information:
+* title:	Original Backrooms
+* source:	https://sketchfab.com/3d-models/original-backrooms-e5c6b30995ff442d9852a1dd697aaef1
+* author:	Huuxloc (https://sketchfab.com/rjh41)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Original Backrooms" (https://sketchfab.com/3d-models/original-backrooms-e5c6b30995ff442d9852a1dd697aaef1) by Huuxloc (https://sketchfab.com/rjh41) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
