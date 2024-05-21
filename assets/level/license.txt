@@ -1,0 +1,11 @@
+Model Information:
+* title:	Level !
+* source:	https://sketchfab.com/3d-models/level-fb49ebe22bfe452d9cba2263473bbba4
+* author:	realism (https://sketchfab.com/RealismModels)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Level !" (https://sketchfab.com/3d-models/level-fb49ebe22bfe452d9cba2263473bbba4) by realism (https://sketchfab.com/RealismModels) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
