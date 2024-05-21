@@ -11,7 +11,7 @@ class Controller(Entity):
         super().__init__(ignore_paused = True, **kwargs)
         self.sky = Sky(texture='sky_sunset')
         self.ground = Entity(model='plane', collider='box', scale=64, texture='grass', texture_scale=(4,4))
-        self.backrooms = Entity(model="assets/backrooms_cubes_room/scene", parents=scene, scale=2, collider="mesh", origin_y=-0.5)
+        self.backrooms = Entity(model="assets/original-backrooms/source/Sketchfab_2022_04_30_13_07_42", parents=scene, scale=2, collider="mesh", origin_y=-0.5)
         self.player = FirstPersonController()
         self.player.gun = Entity(model='assets/thompson_submachine_gun/scene', 
                                  parent=camera, position =Vec3(0.352125, -0.219659, 0.445983), scale=(.3,.3,.3),
