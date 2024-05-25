@@ -25,6 +25,11 @@ class Player(FirstPersonController):
         if hit_check.hit:
             print("Collision!!!", hit_check.entity)
 
+    def backrooms_collisions(self):
+        if self.intersects(self.game.backrooms).hit:
+            print("Backrooms Collision!")
+
+
     
     def update(self):
         super().update()
@@ -37,10 +42,17 @@ class Player(FirstPersonController):
             self.position = self.start_pos
 
         self.check_collisions()
+        self.backrooms_collisions()
 
 class Backrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets\original_backrooms\scene.gltf", parents=scene, scale=2, collider="box", origin_y=0)
+        super().__init__(model="assets\level\scene.gltf", parents=scene, scale=2, collider="mesh", origin_y=0)
+
+        self.collider = self.model
+
+class RedBackrooms(Entity):
+    def __init__(self, ):
+        super().__init__(model="", parents=scene, scale=2, collider="mesh", origin_y=0)
 
         self.collider = self.model
 
