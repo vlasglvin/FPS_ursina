@@ -2,11 +2,25 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 
+
+class Bullet(Entity):
+    def __init__(self, **kwargs):
+        super().__init__(
+            model="shphere", color=color.orange, scale=0.1 
+            **kwargs)
+
+
 class Gun(Entity):
     def __init__(self, ):
         super().__init__(model='assets/thompson_submachine_gun/scene', 
                                  parent=camera, position =Vec3(0.352125, -0.219659, 0.445983), scale=(.3,.3,.3),
                                 origin_z=-.5, rotation=Vec3(0.144472, -81.176, -353.45), on_cooldown=False)
+
+    def shoot(self):
+        if mouse.hovered_entity:
+            mouse.hovered_entity.blink(color.red)
+
+
 
 class Player(FirstPersonController):
     
@@ -15,8 +29,13 @@ class Player(FirstPersonController):
         self.gun = Gun()
         self.game = game
     
+
+    
     def input(self, key):
         super().input(key)
+        if key == "left mouse down":
+            self.gun.shoot()
+
                  
 
     def check_collisions(self):
@@ -46,13 +65,13 @@ class Player(FirstPersonController):
 
 class Backrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets\level\scene.gltf", parents=scene, scale=2, collider="mesh", origin_y=0)
+        super().__init__(model="assets/original_backrooms", parents=scene, scale=2, collider="mesh", origin_y=0)
 
         self.collider = self.model
 
 class RedBackrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="", parents=scene, scale=2, collider="mesh", origin_y=0)
+        super().__init__(model="assets\level\scene.gltf", parents=scene, scale=0.1, collider="box", origin_y=0)
 
         self.collider = self.model
 
