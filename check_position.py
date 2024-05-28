@@ -6,16 +6,23 @@ from ursina.shaders import lit_with_shadows_shader
 app = Ursina()
 Entity.default_shader = lit_with_shadows_shader
 
+
+class Gun(Entity):
+    def __init__(self, ):
+        super().__init__(model='assets/thompson_submachine_gun/scene', 
+                                 parent=camera, position =Vec3(0.352125, -0.219659, 0.445983), scale=(.3,.3,.3),
+                                origin_z=-.5, rotation=Vec3(0.144472, -81.176, -353.45), on_cooldown=False)
+
+
 class Controller(Entity):
     def __init__(self, **kwargs):
         super().__init__(ignore_paused = True, **kwargs)
         self.sky = Sky(texture='sky_sunset')
         self.ground = Entity(model='plane', collider='box', scale=64, texture='grass', texture_scale=(4,4))
         self.player = FirstPersonController()
-        self.player.gun = Entity(model='assets/thompson_submachine_gun/scene', 
-                                 parent=camera, position=(.5,-.25,.25), scale=(.3,.2,1),
-                                origin_z=-.5, rotation=(0,0,0), on_cooldown=False)
-
+        self.gun = Gun()
+        self.player.gun = Entity( parent=camera, model="sphere", color=color.orange, scale=0.023, position = Vec3(0.220745, -0.200979, 0.763693),
+            **kwargs)
     def update(self):
         # Зміна кута обертання за допомогою клавіш
         rotation_speed = 100 * time.dt

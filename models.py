@@ -4,11 +4,17 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 
 
 class Bullet(Entity):
-    def __init__(self, **kwargs):
+    def __init__(self, dir_pos, **kwargs):
         super().__init__(
-            model="shphere", color=color.orange, scale=0.1 
+            model="sphere", parent=camera, color=color.orange, scale=0.023, position = Vec3(0.220745, -0.200979, 0.763693),
             **kwargs)
+        # self.position += dir_pos
+        self.direction = dir_pos
+        self.speed = 20
+        self.collider = 'box'
 
+    def update(self):
+        self.position += self.direction * self.speed * time.dt
 
 class Gun(Entity):
     def __init__(self, ):
@@ -19,6 +25,12 @@ class Gun(Entity):
     def shoot(self):
         if mouse.hovered_entity:
             mouse.hovered_entity.blink(color.red)
+        
+        bullet_dir = camera.forward
+
+        new_bullet = Bullet(bullet_dir)
+
+
 
 
 
@@ -65,13 +77,13 @@ class Player(FirstPersonController):
 
 class Backrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets/original_backrooms", parents=scene, scale=2, collider="mesh", origin_y=0)
+        super().__init__(model="assets/original_backrooms", parent=scene, scale=2, collider="mesh", origin_y=0)
 
         self.collider = self.model
 
 class RedBackrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets\level\scene.gltf", parents=scene, scale=0.1, collider="box", origin_y=0)
+        super().__init__(model="assets\level\scene.gltf", parent=scene, scale=0.1, collider="box", origin_y=0)
 
         self.collider = self.model
 
