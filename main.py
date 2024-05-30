@@ -4,6 +4,7 @@ from ursina.prefabs.sky import Sky
 from ursina.shaders import lit_with_shadows_shader
 
 from models import Backrooms, Player, Partygoer, Bacteria, RedBackrooms
+from ursina.prefabs.health_bar import HealthBar
 
 app = Ursina()
 Entity.default_shader = lit_with_shadows_shader
@@ -18,7 +19,6 @@ class Controller(Entity):
         self.player = Player(self)  
         self.enemy = Bacteria()
         self.enemy2 = Partygoer()
-        self.enemy2.x = 5
         
 
 
