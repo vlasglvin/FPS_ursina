@@ -20,8 +20,15 @@ class Gun(Entity):
         super().__init__(model='assets/thompson_submachine_gun/scene', 
                                  parent=camera, position =Vec3(0.352125, -0.219659, 0.445983), scale=(.3,.3,.3),
                                 origin_z=-.5, rotation=Vec3(0.144472, -81.176, -353.45), on_cooldown=False)
+        
+        self.shot_sound = Audio("assets/sounds/10 Guage Shotgun-SoundBible.com-74120584.wav", autoplay=False)
 
 
+    def shot(self):
+        if self.on_cooldown:
+            self.rotation=Vec3(0.144472, -71.176, -333.45)
+        else:
+            self.rotation=Vec3(0.144472, -81.176, -353.45)
 
 
 
@@ -71,9 +78,9 @@ class Player(FirstPersonController):
         if not self.gun.on_cooldown:
             print('shoot')
             self.gun.on_cooldown = True
-            from ursina.prefabs.ursfx import ursfx
-            ursfx([(0.0, 0.0), (0.1, 0.9), (0.15, 0.75), (0.3, 0.14), (0.6, 0.0)], volume=0.5, wave='noise', pitch=random.uniform(-13,-12), pitch_change=-12, speed=3.0)
-            invoke(setattr, self.gun, 'on_cooldown', False, delay=.15)
+            self.gun.shot()
+            self.gun.shot_sound.play()
+            invoke(setattr, self.gun, 'on_cooldown', False, delay=.1)
             if mouse.hovered_entity and hasattr(mouse.hovered_entity, 'hp'):
                 mouse.hovered_entity.hp -= 10
                 print(mouse.hovered_entity, mouse.hovered_entity.hp)

@@ -16,6 +16,7 @@ class Controller(Entity):
         self.ground = Entity(model='plane', collider='box', scale=120, texture='grass', texture_scale=(4,4))
         #self.backrooms = Backrooms()
         self.backrooms = RedBackrooms()
+        self.music = Audio("assets/sounds/MyVeryOwnDeadShip.ogg",  volume = 0.3)
         self.player = Player(self)  
         self.enemy = Bacteria()
         self.enemy2 = Partygoer()
