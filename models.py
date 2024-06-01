@@ -92,17 +92,10 @@ class RedBackrooms(Entity):
 
         self.collider = self.model
 
-class Bacteria(Entity):
-    def __init__(self):
-        super().__init__(model="assets/bacteria_backrooms/scene", parent=scene, scale=0.7, collider="box", origin_y=0, color=color.black)
-        self.hp = 100
-        self.position = (4, 0, 7)
-class Partygoer(Entity):
-    def __init__(self):
-        super().__init__(model="assets/partygoer_from_backrooms/scene.gltf", parent=scene, scale=2.2, collider="box", origin_y=0)
-        self.position = (-3, 0 ,5)
-        self.health_bar = Entity(parent=self, y=2.5, model='cube', color=color.red, world_scale=(1.5,.1,.1))
-        self.max_hp = 100
+class Enemy(Entity):
+    def __init__(self, **kwargs):
+        super().__init__(parent=scene, collider="box", origin_y=0, **kwargs)
+        self.health_bar = Entity(parent=self, y=6.5, model='cube', color=color.red, world_scale=(1.5,.1,.1))
         self.max_hp = 100
         self.hp = self.max_hp
 
@@ -122,3 +115,13 @@ class Partygoer(Entity):
 
         self.health_bar.world_scale_x = self.hp / self.max_hp * 1.5
         self.health_bar.alpha = 1
+
+class Bacteria(Enemy):
+    def __init__(self):
+        super().__init__(model="assets/bacteria_backrooms/scene", scale=0.7, color=color.black)
+        self.position = (4, 0, 7)
+class Partygoer(Enemy):
+    def __init__(self):
+        super().__init__(model="assets/partygoer_from_backrooms/scene.gltf", scale=2.2, )
+        self.position = (-3, 0 ,5)
+        self.health_bar.y = 2.5
