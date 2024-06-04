@@ -100,14 +100,18 @@ class RedBackrooms(Entity):
         self.collider = self.model
 
 class Enemy(Entity):
-    def __init__(self, **kwargs):
+    def __init__(self,player ,**kwargs):
         super().__init__(parent=scene, collider="box", origin_y=0, **kwargs)
         self.health_bar = Entity(parent=self, y=6.5, model='cube', color=color.red, world_scale=(1.5,.1,.1))
         self.max_hp = 100
         self.hp = self.max_hp
+        self.player = player
+        self.add_script(SmoothFollow(target=self.player,  offset=(0,0,0), speed=0.3))
 
     def update(self):
         self.health_bar.alpha = max(0, self.health_bar.alpha - time.dt)
+        self.look_at(target=self.player, axis='forward')
+        self.rotation_y += 180
 
     @property
     def hp(self):
@@ -124,11 +128,11 @@ class Enemy(Entity):
         self.health_bar.alpha = 1
 
 class Bacteria(Enemy):
-    def __init__(self):
-        super().__init__(model="assets/bacteria_backrooms/scene", scale=0.7, color=color.black)
-        self.position = (4, 0, 7)
+    def __init__(self, player):
+        super().__init__(player,model="assets/bacteria_backrooms/scene", scale=0.7, color=color.black)
+        self.position = Vec3(2.41571, 0, -17.9051)
 class Partygoer(Enemy):
-    def __init__(self):
-        super().__init__(model="assets/partygoer_from_backrooms/scene.gltf", scale=2.2, )
-        self.position = (-3, 0 ,5)
+    def __init__(self ,position, player):
+        super().__init__(player,model="assets/partygoer_from_backrooms/scene.gltf", scale=2.2, )
+        self.position = position
         self.health_bar.y = 2.5
