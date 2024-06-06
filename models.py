@@ -1,6 +1,7 @@
 
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+from random import randint  
 
 
 class Bullet(Entity):
@@ -9,7 +10,7 @@ class Bullet(Entity):
             model="sphere", color=color.orange, collider="mesh", scale=0.023, position = player_pos + Vec3(1, 1.1, 3),
             **kwargs)
         # self.position += dir_pos
-        self.direction = dir_pos
+        self.direction = dir_pos    
         self.speed = 20
 
     def update(self):
@@ -106,12 +107,17 @@ class Enemy(Entity):
         self.max_hp = 100
         self.hp = self.max_hp
         self.player = player
-        self.add_script(SmoothFollow(target=self.player,  offset=(0,0,0), speed=0.3))
-
+        self.speed = randint(2,3)
+        #self.add_script(SmoothFollow(target=self.player,  offset=(0,0,0), speed=rand_speed))
     def update(self):
         self.health_bar.alpha = max(0, self.health_bar.alpha - time.dt)
-        self.look_at(target=self.player, axis='forward')
+        player_direction = Vec3(self.player.x - self.position.x, 0, self.player.z - self.position.z)
+        player_direction = player_direction.normalized()
+        self.position += player_direction * self.speed * time.dt
+        self.look_at(Vec3(self.player.x, self.position.y, self.player.z))
         self.rotation_y += 180
+        self.rotation_y = 0
+        self.rotation_z = 0
 
     @property
     def hp(self):

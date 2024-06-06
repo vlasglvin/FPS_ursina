@@ -19,8 +19,8 @@ class Controller(Entity):
         self.music = Audio("assets/sounds/MyVeryOwnDeadShip.ogg",  volume = 0.3)
         self.player = Player(self)  
         #self.enemy = Bacteria(self.player)
-        self.enemy2 = Partygoer(Vec3(3.69454, 0 , 35.7391), self.player)
-        self.enemy3 = Partygoer(Vec3(8.32528, 0.12, 32.6679), self.player)
+        self.enemy2 = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
+        self.enemy3 = Partygoer(Vec3(-3.50633, 0.12, 39.8768), self.player)
 
 
 
