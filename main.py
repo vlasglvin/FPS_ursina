@@ -27,6 +27,7 @@ class Controller(Entity):
     def input(self, key):
         if key == "g":
             print(self.player.position)
+            print(self.player.hp)   
 
 
         
