@@ -44,6 +44,7 @@ class Player(FirstPersonController):
     
     def __init__(self, game):
         super().__init__()
+        self.start_pos = self.position
         self.gun = Gun()
         self.game = game
         self.hp = 100
@@ -61,11 +62,17 @@ class Player(FirstPersonController):
                  
 
     def check_collisions(self):
-        forward = self.forward * self.speed * time.dt
-        hit_check = raycast(self.position, self.forward, distance = self.speed*time.dt, ignore=[self])
-        if hit_check.hit:
-            print("Collision!!!", hit_check.entity)
+        dirs = [Vec3(0,0,1), Vec3(0,0,-1), Vec3(-1,0,0), Vec3(0,0,1)]
+        for dir in dirs:
+            forward = self.forward * self.speed * time.dt
+            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self],
+                                debug=True)
+            if hit_check.hit:
+                print("Collision!!!", hit_check.entity)
+                if hit_check.entity == self.game.backrooms:
+                    self.position -= self.forward * self.speed * time.dt
 
+            
     def backrooms_collisions(self):
         if self.intersects(self.game.backrooms).hit:
             print("Backrooms Collision!")
@@ -112,9 +119,10 @@ class Backrooms(Entity):
 
 class RedBackrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets\level\scene.gltf", parent=scene, scale=0.1, collider="box", origin_y=0)
+        super().__init__(model="assets\level\scene.gltf", parent=scene, scale=0.1, collider="mesh", origin_y=0,
+                         show_wireframe = True)
+        #self.wall = Entity(model='cube', color = color.red, scale = (0.1, self.scale_y, self.scale_z))
 
-        self.collider = self.model
 
 class Enemy(Entity):
     def __init__(self,player ,**kwargs):
