@@ -5,9 +5,9 @@ from random import randint
 
 
 class Bullet(Entity):
-    def __init__(self, player_pos, dir_pos, **kwargs):
+    def __init__(self, gun_pos, dir_pos, **kwargs):
         super().__init__(
-            model="sphere", color=color.orange, collider="mesh", scale=0.023, position = player_pos + Vec3(1, 1.1, 3),
+            model="sphere", color=color.orange, collider="mesh", scale=0.023, position = gun_pos,
             **kwargs)
         # self.position += dir_pos
         self.direction = dir_pos    
@@ -15,6 +15,8 @@ class Bullet(Entity):
 
     def update(self):
         self.position += self.direction * self.speed * time.dt
+        if distance(self.position, camera.position) > 10:
+            destroy(self)
 
 class Gun(Entity):
     def __init__(self, ):
@@ -27,9 +29,13 @@ class Gun(Entity):
 
     def shot(self):
         if self.on_cooldown:
-            self.rotation=Vec3(0.144472, -71.176, -333.45)
+            self.rotation=Vec3(0.144472, -81.176, -363.59)
+            self.position = Vec3(0.352125, -0.219659, 0.346547)
+            bullet_pos = self.position + Vec3(0,0,1) * 1.5
+            bullet = Bullet(gun_pos= bullet_pos, dir_pos = Vec3(0,0,1))
         else:
             self.rotation=Vec3(0.144472, -81.176, -353.45)
+            self.position=Vec3(0.352125, -0.219659, 0.445983)
 
 
 
@@ -42,7 +48,7 @@ class Player(FirstPersonController):
         self.game = game
         self.hp = 100
         self.max_hp = 100
-        self.health_bar = Entity(parent=camera.ui, model='quad', color=color.green, scale = (0.5, 0.05), position= (-0.5, -0.45), z=-1)
+        self.health_bar = Entity(parent=camera.ui, model='quad', color=color.green, scale = (0.5, 0.05), origin=(-0.5, 0), position= (-0.8, -0.45), z=-1)
         self.damage_overlay = Entity(parent=camera.ui, model="squad", color=color.rgba(140, 0, 5, 0), scale = (2,2))
     
 
@@ -68,8 +74,7 @@ class Player(FirstPersonController):
     
     def update(self):
         super().update()
-        self.health_bar.alpha = max(0, self.health_bar.alpha - time.dt)
-        
+        self.gun.shot()
 
         if held_keys["shift"]:
             self.speed = 10
@@ -86,7 +91,6 @@ class Player(FirstPersonController):
         if not self.gun.on_cooldown:
             print('shoot')
             self.gun.on_cooldown = True
-            self.gun.shot()
             self.gun.shot_sound.play()
             invoke(setattr, self.gun, 'on_cooldown', False, delay=.1)
             if mouse.hovered_entity and hasattr(mouse.hovered_entity, 'hp'):
@@ -98,6 +102,7 @@ class Player(FirstPersonController):
     def  take_damage(self, damage):
         self.hp -= damage
         self.damage_overlay.color = color.rgba(140, 0, 5, 150)
+        self.health_bar.scale_x = (self.hp/self.max_hp) * 0.5
 
 class Backrooms(Entity):
     def __init__(self, ):
@@ -140,7 +145,7 @@ class Enemy(Entity):
             self.rotation_z = 0
         
         
-        if distance_to_player <= 4 and self.can_damage:
+        if distance_to_player <= 2 and self.can_damage:
             self.player.take_damage(10)
             self.can_damage = False
             invoke(self.reset_damage, delay = 1)

@@ -21,8 +21,8 @@ class Controller(Entity):
         self.ground = Entity(model='plane', collider='box', scale=64, texture='grass', texture_scale=(4,4))
         self.player = FirstPersonController()
         self.gun = Gun()
-        self.player.gun = Entity( parent=camera, model="sphere", color=color.orange, scale=0.023, position = Vec3(0.220745, -0.200979, 0.763693),
-            **kwargs)
+        self.player.gun = self.gun
+        
     def update(self):
         # Зміна кута обертання за допомогою клавіш
         rotation_speed = 100 * time.dt
