@@ -65,7 +65,7 @@ class Player(FirstPersonController):
         dirs = [Vec3(0,0,1), Vec3(0,0,-1), Vec3(-1,0,0), Vec3(0,0,1)]
         for dir in dirs:
             forward = self.forward * self.speed * time.dt
-            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self], debug=True, thickness = 0.1)
+            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self], debug=True)
 
             if hit_check.hit:
                 print("Collision!!!", hit_check.entity)
@@ -120,9 +120,17 @@ class Backrooms(Entity):
 
 class RedBackrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets\level\scene.gltf", parent=scene, scale=0.1, collider="mesh", origin_y=0,
+        super().__init__(model="assets\level\scene.gltf", parent=scene, scale=0.1, origin_y=0,
                          show_wireframe = True)
-        #self.wall = Entity(model='cube', color = color.red, scale = (0.1, self.scale_y, self.scale_z))
+        self.wall = Entity(model='cube', color = color.red, scale = (0.1, 12, 325), collider='box', origin_y=0,
+                           position = Vec3(-4.38933, 1.59918, -3.1219))
+        self.wall_2 = Entity(model='cube', color = color.red, scale = (0.1, 12, 325), collider='box', origin_y=0,
+                           position = Vec3(4.97608, 1.38525, -52.6577))
+        self.wall_3 = Entity(model='cube', color = color.black, scale = (20, 12, 0.1), collider='box', origin_y=0,
+                           position = Vec3(0.363483, 1.70098, 37.5179))
+        self.wall_4 = Entity(model='cube', color = color.black, scale = (20, 12, 0.1), collider='box', origin_y=0,
+                           position = Vec3(-0.00150489, 1.42995, -146.282))
+        
 
 
 class Enemy(Entity):

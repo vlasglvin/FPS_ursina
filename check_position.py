@@ -3,6 +3,8 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 from ursina.prefabs.sky import Sky
 from ursina.shaders import lit_with_shadows_shader
 
+from models import RedBackrooms
+
 app = Ursina()
 Entity.default_shader = lit_with_shadows_shader
 
@@ -18,11 +20,12 @@ class Controller(Entity):
     def __init__(self, **kwargs):
         super().__init__(ignore_paused = True, **kwargs)
         self.sky = Sky(texture='sky_sunset')
-        self.ground = Entity(model='plane', collider='box', scale=64, texture='grass', texture_scale=(4,4))
+        self.ground = Entity(model='plane', collider='box', scale=(30, 3, 300), texture='grass', texture_scale=(4,4))
         self.player = FirstPersonController()
         self.gun = Gun()
         self.player.gun = self.gun
-        
+        self.backrooms = RedBackrooms()
+
     def update(self):
         # Зміна кута обертання за допомогою клавіш
         rotation_speed = 100 * time.dt
@@ -57,8 +60,8 @@ class Controller(Entity):
 
         # Друкування поточної ротації і позиції для легшого налаштування
         if held_keys['space']:
-            print('Current gun rotation:', self.player.gun.rotation)
-            print('Current gun position:', self.player.gun.position)
+            #print('Current gun rotation:', self.player.gun.rotation)
+            print('Current player position:', self.player.position)
 
 
 window.title = "shoot and run"

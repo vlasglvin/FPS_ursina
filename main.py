@@ -13,14 +13,14 @@ class Controller(Entity):
     def __init__(self, **kwargs):
         super().__init__(ignore_paused = True, **kwargs)
         #self.sky = Sky(texture='sky_sunset')
-        self.ground = Entity(model='plane', collider='box', scale=120, texture='grass', texture_scale=(4,4))
-        self.backrooms = Backrooms()
-        #self.backrooms = RedBackrooms()
+        self.ground = Entity(model='plane', collider='box', scale=(30, 3, 325), texture='grass', texture_scale=(4,4))
+        #self.backrooms = Backrooms()
+        self.backrooms = RedBackrooms()
         self.music = Audio("assets/sounds/MyVeryOwnDeadShip.ogg",  volume = 0.3)
         self.player = Player(self)  
         #self.enemy = Bacteria(self.player)
-        self.enemy2 = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
-        self.enemy3 = Partygoer(Vec3(-3.50633, 0.12, 39.8768), self.player)
+        #self.enemy2 = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
+        #self.enemy3 = Partygoer(Vec3(-3.50633, 0.12, 39.8768), self.player)
 
 
 
