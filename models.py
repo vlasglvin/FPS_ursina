@@ -65,12 +65,12 @@ class Player(FirstPersonController):
         dirs = [Vec3(0,0,1), Vec3(0,0,-1), Vec3(-1,0,0), Vec3(0,0,1)]
         for dir in dirs:
             forward = self.forward * self.speed * time.dt
-            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self],
-                                debug=True)
+            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self], debug=True, thickness = 0.1)
+
             if hit_check.hit:
                 print("Collision!!!", hit_check.entity)
                 if hit_check.entity == self.game.backrooms:
-                    self.position -= self.forward * self.speed * time.dt
+                    self.position = self.old_pos
 
             
     def backrooms_collisions(self):
@@ -80,6 +80,7 @@ class Player(FirstPersonController):
 
     
     def update(self):
+        self.old_pos = self.position
         super().update()
         self.gun.shot()
 
@@ -113,7 +114,7 @@ class Player(FirstPersonController):
 
 class Backrooms(Entity):
     def __init__(self, ):
-        super().__init__(model="assets/original_backrooms", parent=scene, scale=2, collider="mesh", origin_y=0)
+        super().__init__(model="assets/original_backrooms/scene", parent=scene, scale=2, collider="mesh", origin_y=0)
 
         self.collider = self.model
 
