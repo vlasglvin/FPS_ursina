@@ -60,24 +60,6 @@ class Player(FirstPersonController):
             self.shoot()
 
                  
-
-    def check_collisions(self):
-        dirs = [Vec3(0,0,1), Vec3(0,0,-1), Vec3(-1,0,0), Vec3(0,0,1)]
-        for dir in dirs:
-            forward = self.forward * self.speed * time.dt
-            hit_check = raycast(self.position, dir, distance = 0.5, ignore=[self], debug=True)
-
-            if hit_check.hit:
-                print("Collision!!!", hit_check.entity)
-                if hit_check.entity == self.game.backrooms:
-                    self.position = self.old_pos
-
-            
-    def backrooms_collisions(self):
-        if self.intersects(self.game.backrooms).hit:
-            print("Backrooms Collision!")
-
-
     
     def update(self):
         self.old_pos = self.position
@@ -92,8 +74,10 @@ class Player(FirstPersonController):
         if self.y < -30:
             self.position = self.start_pos
 
-        self.check_collisions()
-        self.backrooms_collisions()
+        exit_distance = distance(self.position, self.game.backrooms.exit.position)
+        if exit_distance<2:
+            application.paused = True
+
 
     def shoot(self):
         if not self.gun.on_cooldown:
@@ -128,8 +112,8 @@ class RedBackrooms(Entity):
                            position = Vec3(4.97608, 1.38525, -52.6577))
         self.wall_3 = Entity(model='cube', color = color.black, scale = (20, 12, 0.1), collider='box', origin_y=0,
                            position = Vec3(0.363483, 1.70098, 37.5179))
-        self.wall_4 = Entity(model='cube', color = color.black, scale = (20, 12, 0.1), collider='box', origin_y=0,
-                           position = Vec3(-0.00150489, 1.42995, -146.282))
+        self.exit = Entity(model='cube', color = color.black, scale = (20, 12, 0.1), collider='box', origin_y=0,
+                            position = Vec3(-0.00150489, 1.42995, -146.282))
         
 
 
