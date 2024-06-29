@@ -49,7 +49,7 @@ class Player(FirstPersonController):
         self.game = game
         self.hp = 100
         self.max_hp = 100
-        self.health_bar = Entity(parent=camera.ui, model='quad', color=color.green, scale = (0.5, 0.05), origin=(-0.5, 0), position= (-0.8, -0.45), z=-1)
+        self.health_bar = Entity(parent=camera.ui, model='quad', color=color.green, scale = (0.5, 0.05), origin=(-0.5, 0), position= (-0.8, -0.45), z=-50)
         self.damage_overlay = Entity(parent=camera.ui, model="squad", color=color.rgba(140, 0, 5, 0), scale = (2,2))
     
 
@@ -76,7 +76,8 @@ class Player(FirstPersonController):
 
         exit_distance = distance(self.position, self.game.backrooms.exit.position)
         if exit_distance<2:
-            application.paused = True
+            self.game.toggle_menu()
+
 
 
     def shoot(self):
@@ -93,8 +94,14 @@ class Player(FirstPersonController):
 
     def  take_damage(self, damage):
         self.hp -= damage
-        self.damage_overlay.color = color.rgba(140, 0, 5, 150)
-        self.health_bar.scale_x = (self.hp/self.max_hp) * 0.5
+        if self.hp <= 0:
+            self.hp = 0
+            #self.health_bar.scale_x = 0
+            self.game.toggle_menu()
+        else:
+            self.damage_overlay.color = color.rgba(140, 0, 5, 150)
+            self.health_bar.scale_x = (self.hp/self.max_hp) * 0.5
+
 
 class Backrooms(Entity):
     def __init__(self, ):
@@ -124,7 +131,7 @@ class Enemy(Entity):
         self.max_hp = 100
         self.hp = self.max_hp
         self.player = player
-        self.speed = randint(2,3)
+        self.speed = randint(9,12)
         self.can_damage = True
     
     def reset_damage(self):

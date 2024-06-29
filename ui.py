@@ -18,7 +18,7 @@ class Menu(Entity):
     def __init__(self, game, **kwargs):
         super().__init__(parent=camera.ui, ignore_paused = True, **kwargs)
         #self.menu_music = Audio("assets/b423b42.wav", loop = True)  
-        self.background = Sprite(parent = self, scale = 0.1, texture = "assets\Backrooms_model.jpg", color = color.gray, z = 1)
+        self.background = Sprite(parent = self, scale = 0.1, texture = "assets\Backrooms_model.jpg", color = color.gray, z = 100)
         #Text.default_font = "assets/PressStart2P-Regular.ttf"
 
         Text("Escape the Backrooms", scale=3, parent=self, origin = (0,0), x = 0, y = 0.4)
