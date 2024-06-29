@@ -36,6 +36,7 @@ class Controller(Entity):
         #self.enemy = Bacteria(self.player)
         self.enemy2 = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
         self.enemy3 = Partygoer(Vec3(-3.50633, 0.12, 39.8768), self.player)
+        self.toggle_menu()
 
 
 
