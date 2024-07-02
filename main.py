@@ -24,6 +24,7 @@ class Controller(Entity):
         self.toggle_menu()
         mouse.locked = False
         mouse.visible = True
+        self.start = False
 
     def toggle_menu(self):
         application.paused = not application.paused
@@ -32,6 +33,7 @@ class Controller(Entity):
         self.player.health_bar.enabled = not application.paused
         mouse.locked = not mouse.locked
         mouse.visible = not mouse.visible
+        self.player.cursor.enabled = not application.paused
     
     
     def new_game(self):       
@@ -40,20 +42,28 @@ class Controller(Entity):
             
         
         #self.enemy = Bacteria(self.player)
-        self.enemy2 = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
         self.enemy3 = Partygoer(Vec3(-3.50633, 0.12, 39.8768), self.player)
-        self.enemy_list.append(self.enemy2)
         self.enemy_list.append(self.enemy3)
         self.player.position = self.player.start_pos
         self.player.hp = self.player.max_hp
         self.player.health_bar = Entity(parent=camera.ui, model='quad', color=color.green, scale = (0.5, 0.05), origin=(-0.5, 0), position= (-0.8, -0.45), z=-50)
+        self.start = True
+        self.spawn_enemy()
         self.toggle_menu()
 
 
     def input(self, key):
-        if key == "g":
-            print(self.player.position)
-            print(self.player.hp)   
+        if key == "escape" and self.start:
+            self.toggle_menu()
+
+    def spawn_enemy(self):
+        if not self.start:
+            return
+        new_enemy = Partygoer(Vec3(3.71027, 0.12, 39.667), self.player)
+        self.enemy_list.append(new_enemy)
+
+        next_spawn_time = random.uniform(2,5)
+        invoke(self.spawn_enemy, delay=next_spawn_time)
 
 
         

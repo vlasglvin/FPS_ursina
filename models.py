@@ -76,6 +76,7 @@ class Player(FirstPersonController):
 
         exit_distance = distance(self.position, self.game.backrooms.exit.position)
         if exit_distance<2:
+            self.start = False
             self.game.toggle_menu()
 
 
@@ -97,6 +98,7 @@ class Player(FirstPersonController):
         if self.hp <= 0:
             self.hp = 0
             #self.health_bar.scale_x = 0
+            self.start = False
             self.game.toggle_menu()
         else:
             self.damage_overlay.color = color.rgba(140, 0, 5, 150)

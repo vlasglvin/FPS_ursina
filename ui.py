@@ -7,11 +7,14 @@ class MenuButton(Button):
                          color=color.rgb(107, 107, 107),
                          texture="assets/buttons.png",
                          scale = (1, 0.1),
-                         text_size = 2,
+                         text_size = 4,
+                         text_scale = 4,
                          text_color=color.white,
                          y = y, x = x, origin=(0,0),
                          ignore_paused = True,
                          **kwargs)
+        
+        self.text_entity.world_scale = 50
 
 
 class Menu(Entity):
@@ -19,7 +22,7 @@ class Menu(Entity):
         super().__init__(parent=camera.ui, ignore_paused = True, **kwargs)
         #self.menu_music = Audio("assets/b423b42.wav", loop = True)  
         self.background = Sprite(parent = self, scale = 0.1, texture = "assets\Backrooms_model.jpg", color = color.gray, z = 100)
-        #Text.default_font = "assets/PressStart2P-Regular.ttf"
+        Text.default_font = "assets/Jersey25Charted-Regular.ttf"
 
         Text("Escape the Backrooms", scale=3, parent=self, origin = (0,0), x = 0, y = 0.4)
 
